@@ -131,7 +131,7 @@ seed_worker = set_global_seed(SEED)
 # =============================================================================
 # Horizons & Models
 # =============================================================================
-HORIZONS = [7]
+HORIZONS = [1, 3, 5, 7]
 MODELS_TO_TUNE = [
     "ASTGCN", "DCRNN", "GCN_FC", "STGCN_GRU", "FC_LSTM",
     "TCN", "CONVGRU", "CONVLSTM", "TransformerModel"
