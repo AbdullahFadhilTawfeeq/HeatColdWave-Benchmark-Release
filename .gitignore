@@ -1,0 +1,75 @@
+# ----------------------------
+# Operating system / editor
+# ----------------------------
+.DS_Store
+Thumbs.db
+*.lnk
+*.tmp
+*.log
+
+# ----------------------------
+# Python cache
+# ----------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ----------------------------
+# Virtual environments
+# ----------------------------
+venv/
+env/
+.venv/
+
+# ----------------------------
+# Large data files (NOT shared)
+# ----------------------------
+data/
+results/
+*.csv
+*.xlsx
+
+# ----------------------------
+# Model checkpoints & binaries
+# ----------------------------
+*.pth
+*.pt
+*.h5
+
+# ----------------------------
+# Hyperparameter optimization artifacts
+# ----------------------------
+*.db
+*.json
+
+# ----------------------------
+# Figures & plots (generated)
+# ----------------------------
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.pdf
+
+# ----------------------------
+# GIS files (generated outputs)
+# ----------------------------
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
+
+# ----------------------------
+# Manuscript drafts & notes
+# ----------------------------
+manuscript/
+other files/
+references/
+
+# ----------------------------
+# Archives
+# ----------------------------
+*.zip
+*.rar
