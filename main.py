@@ -2,33 +2,48 @@
 Script Name:
     main.py
 
-Purpose:
-    Public-release implementation of a benchmark framework for heatwave/coldwave prediction under severe
-    class imbalance using multi-station daily meteorological observations.
+Description:
+    Public-release implementation of a unified benchmark framework for the detection and prediction of
+    heatwave and coldwave events under severe class imbalance conditions, using multi-station daily
+    meteorological observations.
 
-    High-level pipeline:
-      (1) Load and merge station CSV files (daily time series) and attach station metadata (lat/lon/elevation).
-      (2) Construct a spatial graph using Haversine-distance similarity (adjacency -> edge_index/edge_weight).
-      (3) Generate heatwave/coldwave labels using percentile-based daily thresholds with spell filtering.
-      (4) Prepare feature tensor X (T, N, F) and label tensor y (T, N) and standardize features.
+    The framework is designed to support reproducible, large-scale comparison of temporal, spatial,
+    spatio-temporal, and attention-based deep learning architectures across multiple forecast horizons.
+    Particular emphasis is placed on cost-sensitive learning, minority-class performance, and event-level
+    (spell-based) evaluation.
 
-Dependencies:
-    - Python >= 3.10
-    - numpy, pandas, scikit-learn, scipy
+Methodological Pipeline:
+    (1) Load and harmonize daily meteorological time series from multiple ground-based weather stations,
+        including the integration of station metadata (latitude, longitude, elevation).
+    (2) Construct a spatial graph representing inter-station dependencies using Haversine-distance–based
+        similarity, yielding a weighted adjacency structure (edge_index, edge_weight).
+    (3) Derive heatwave and coldwave labels using percentile-based, calendar-aware temperature thresholds,
+        followed by minimum-duration (spell) filtering to ensure event consistency.
+    (4) Assemble standardized spatio-temporal feature tensors X ∈ ℝ^{T×N×F} and corresponding label tensors
+        y ∈ ℝ^{T×N} for supervised learning, evaluation, and benchmarking.
+
+Software Dependencies:
+    - Python ≥ 3.10
+    - numpy, pandas, scipy, scikit-learn
     - torch, torch-geometric
-    - optuna, plotly, matplotlib
+    - optuna
+    - matplotlib, plotly
     - autorank, scikit-posthocs
 
-Author:
-    Abdullah Fadhil
+Notes on Data Availability:
+    - This repository intentionally excludes meteorological datasets to comply with data-use agreements
+      and institutional policies.
+    - Users are expected to provide locally stored station-level CSV files containing daily observations.
+    - Data and output directories are configurable via environment variables:
+          HCW_DATA_DIR   : path to the directory containing station CSV files
+          HCW_OPTUNA_DIR : path to the directory used for Optuna databases and optimization artifacts
+    - If environment variables are not defined, the script falls back to local paths used during
+      development by the author.
 
-Notes for Public Release:
-    - This script expects station CSV files to be available locally. The data are intentionally NOT shipped.
-    - Configure data and output locations via environment variables:
-        HCW_DATA_DIR   : path to station CSV directory
-        HCW_OPTUNA_DIR : directory for Optuna databases and artifacts
-    - If env vars are not set, the script falls back to local paths (intended for the author's machine).
+Authorship:
+    Abdullah Fadhil
 """
+
 
 from __future__ import annotations
 
@@ -78,7 +93,6 @@ from autorank import autorank, plot_stats, create_report
 # =============================================================================
 # Configuration (portable paths)
 # =============================================================================
-# Use environment variables for portability. Fallback preserves the author's current local setup.
 RAW_DIR = Path(os.getenv(
     "HCW_DATA_DIR",
     r"D:/doctorate/DATA/clean data/Regression_based_imputation/2000-2024"
@@ -90,7 +104,6 @@ OPTUNA_DIR = Path(os.getenv(
 ))
 OPTUNA_DIR.mkdir(parents=True, exist_ok=True)
 
-# Optuna logging verbosity (INFO is reasonable for CLI runs)
 optuna.logging.set_verbosity(optuna.logging.INFO)
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
