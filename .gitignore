@@ -1,75 +1,40 @@
-# ----------------------------
-# Operating system / editor
-# ----------------------------
+# OS / editor
 .DS_Store
 Thumbs.db
-*.lnk
-*.tmp
-*.log
+.vscode/
+.idea/
 
-# ----------------------------
-# Python cache
-# ----------------------------
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
-*.pyd
-
-# ----------------------------
-# Virtual environments
-# ----------------------------
-venv/
-env/
 .venv/
+env/
+venv/
 
-# ----------------------------
-# Large data files (NOT shared)
-# ----------------------------
+# Data (never commit)
 data/
+DATA/
+**/*.csv
+**/*.nc
+**/*.grib
+**/*.parquet
+
+# Optuna / results
 results/
-*.csv
-*.xlsx
-
-# ----------------------------
-# Model checkpoints & binaries
-# ----------------------------
-*.pth
-*.pt
-*.h5
-
-# ----------------------------
-# Hyperparameter optimization artifacts
-# ----------------------------
+optuna/
 *.db
-*.json
+*.sqlite
 
-# ----------------------------
-# Figures & plots (generated)
-# ----------------------------
-*.png
-*.jpg
-*.jpeg
-*.svg
-*.pdf
+# Model weights
+*.pt
+*.pth
+*.ckpt
 
-# ----------------------------
-# GIS files (generated outputs)
-# ----------------------------
-*.shp
-*.shx
-*.dbf
-*.prj
-*.cpg
+# Logs / figures
+logs/
+runs/
+figures/
 
-# ----------------------------
-# Manuscript drafts & notes
-# ----------------------------
-manuscript/
-other files/
-references/
-
-# ----------------------------
-# Archives
-# ----------------------------
-*.zip
-*.rar
+# Notebooks
+.ipynb_checkpoints/
