@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+title: "Heatwave and Coldwave Prediction Benchmark under Severe Class Imbalance"
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Fadhil Tawfeeq
+    given-names: Abdullah
+doi: 10.5281/zenodo.18601489
+repository-code: "https://github.com/AbdullahFadhilTawfeeq/HeatColdWave-Benchmark-Release"
+url: "https://doi.org/10.5281/zenodo.18601489"
+license: MIT
+version: "v1.0.0"
+date-released: "2026-02-10"
